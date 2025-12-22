@@ -471,7 +471,7 @@ int main(){
 
 //Q12
 
-#include<iostream>
+/*#include<iostream>
 #include<vector>
 #include<unordered_map>
 
@@ -503,5 +503,45 @@ int main(){
     vector<int> arr={2,7,6,1,4,5};
     int k=3;
     cout<<longestSubarrayDivk(arr,k);
+    return 0;
+}*/
+
+//Q13
+
+#include<iostream>
+#include<vector>
+#include<unordered_map>
+
+using namespace std;
+
+int getPairsCount(vector<int>& arr,int idx,int target){
+    unordered_map<int,int> freq;
+    int count=0;
+
+    for(int i=idx;i<arr.size();i++){
+        if(freq.find(target-arr[i])!=freq.end()){
+            count+=freq[target-arr[i]];
+        }
+
+        freq[arr[i]]++;
+    }
+    return count;
+}
+
+int countTriplets(vector<int>& arr,int target){
+    int cnt=0;
+    int n=arr.size();
+
+    for(int i=0;i<n-2;i++){
+        int rem=target-arr[i];
+        cnt+=getPairsCount(arr,i+1,rem);
+    }
+    return cnt;
+}
+
+int main(){
+    vector<int> arr={0,-1,2,-3,1};
+    int target=-2;
+    cout<<countTriplets(arr,target);
     return 0;
 }
