@@ -71,7 +71,7 @@ int main(){
 
 //Q3
 
-#include<iostream>
+/*#include<iostream>
 #include<vector>
 #include<unordered_map>
 
@@ -111,5 +111,397 @@ int main(){
     }else{
         cout<<"False"<<endl;
     }
+    return 0;
+}*/
+
+//Q4
+
+/*#include<iostream>
+#include<vector>
+#include<unordered_map>
+
+using namespace std;
+
+vector<string> fizzBuzz(int n){
+    vector<string> res;
+
+    //hashmap to store all fizzbuzz mappings
+    unordered_map<int,string> mp={{3,"Fizz"},{5,"Buzz"}};
+
+    //List of Divisors which we will iterate over
+    vector<int> divisors={3,5};
+
+    for(int i=1;i<=n;i++){
+        string s="";
+
+        for(int d:divisors){
+            if(i%d==0){
+                s.append(mp[d]);
+            }
+        }
+        if(s.empty()){
+            s.append(to_string(i));
+        }
+        res.push_back(s);
+    }
+    return res;
+}
+
+int main(){
+    int n=20;
+    vector<string> res=fizzBuzz(n);
+
+    for(const string &s:res){
+        cout<<s<<" ";
+    }
+    return 0;
+}*/
+
+//Q5
+
+/*#include<iostream>
+#include<vector>
+#include<unordered_map>
+
+using namespace std;
+
+int maxDistance(vector<int>& arr){
+    unordered_map<int,int> mp;
+    int res=0;
+
+    for(int i=0;i<arr.size();i++){
+        if(mp.find(arr[i])==mp.end()){
+            mp[arr[i]]=i;
+        }else{
+            res=max(res,i-mp[arr[i]]);
+        }
+    }
+    return res;
+}
+
+int main(){
+    vector<int> arr={1,1,2,2,2,1};
+    cout<<maxDistance(arr);
+    return 0;
+}*/
+
+//Q6
+
+/*#include<iostream>
+#include<vector>
+#include<unordered_set>
+
+using namespace std;
+
+bool checkDuplicatesWithink(vector<int> & arr,int k){
+    unordered_set<int> s;
+
+    for(int i=0;i<arr.size();i++){
+        if(s.find(arr[i])==s.end()){
+            return true;
+        }
+        s.insert(arr[i]);
+
+        if(i>=k){
+            s.erase(arr[i-k]);
+        }
+    }
+    return false;
+}
+
+int main(){
+    vector<int> arr={10,5,3,4,3,5,6};
+    if(checkDuplicatesWithink(arr,3)){
+        cout<<"yes";
+    }else{
+        cout<<"no";
+    }
+    return 0;
+}*/
+
+//Q7
+
+/*#include<iostream>
+#include<vector>
+#include<unordered_set>
+
+using namespace std;
+
+vector<int> intersect(vector<int> & a,vector<int>& b){
+    unordered_set<int> as(a.begin(),a.end());
+
+    unordered_set<int> rs;
+    vector<int> res;
+
+    for(int i=0;i<b.size();i++){
+        if(as.find(b[i])!=as.end() && rs.find(b[i])==rs.end()){
+            rs.insert(b[i]);
+            res.push_back(b[i]);
+        }
+    }
+    return res;
+}
+
+int main(){
+    vector<int> a={1,2,3,2,1};
+    vector<int> b={3,2,2,3,3,2};
+
+    vector<int> res=intersect(a,b);
+
+    for(int i=0;i<res.size();i++){
+        cout<<res[i]<<" ";
+    }
+    return 0;
+}*/
+
+//Q8
+
+/*#include<iostream>
+#include<vector>
+#include<unordered_set>
+
+using namespace std;
+
+vector<int> findUnion(vector<int>& a,vector<int>& b){
+    unordered_set<int> st;
+    
+    //Put all elements of a[] in st// automatically ignores duplicates
+    for(int i=0;i<a.size();i++){
+        st.insert(a[i]);
+    }
+
+    //Put all elements of b[] in st // automatically ignores duplicates
+    for(int i=0;i<b.size();i++){
+        st.insert(b[i]);
+    }
+
+    vector<int> res;
+
+    //iterate through the set to  fill the result array
+    for(auto it:st){
+        res.push_back(it);
+    }
+    return res;
+}
+
+int main(){
+    vector<int> a={1,2,3,2,1};
+    vector<int> b={3,2,2,3,3,2};
+
+    vector<int> res=findUnion(a,b);
+
+    for(int i=0;i<res.size();i++){
+        cout<<res[i]<<" ";
+    }
+    return 0;
+}*/
+
+//Q9
+
+/*#include<iostream>
+#include<vector>
+#include<unordered_map>
+
+using namespace std;
+
+int mostFreqEle(vector<int>& arr){
+    int n=arr.size();
+
+    //insert all elements in hash map
+    unordered_map<int,int> freq;
+    for(int i=0;i<n;i++){
+       freq[arr[i]]++;
+    }
+    //find the max frequency
+    int maxCnt=0,res=-1;
+    for(auto i:freq){
+        int val=i.first, cnt=i.second;
+
+        //update if value is higher ot same but value is larger
+        if(maxCnt<cnt || (cnt==maxCnt && val>res)){
+            res=val;
+            maxCnt=cnt;
+        }
+    }
+    return res;
+}
+
+int main(){
+    vector<int> arr={40,50,30,40,50,30,30};
+    cout<<mostFreqEle(arr);
+    return 0;
+}*/
+
+//Q10
+
+/*#include<iostream>
+#include<vector>
+#include<unordered_set>
+
+using namespace std;
+
+bool twoSum(vector<int>& arr, int target){
+    unordered_set<int> s;
+
+    for(int i=0;i<arr.size();i++){
+        int complement=target-arr[i];
+
+        if(s.find(complement)!=s.end()){
+            return true;
+        }
+        s.insert(arr[i]);
+    }
+    return false;
+}
+
+int main(){
+    vector<int> arr={0,-1,2,-3,1};
+    int target=-2;
+    if(twoSum(arr,target)){
+        cout<<"true";
+    }else{
+        cout<<"false";
+    }
+    return 0;
+}*/
+
+//Q11
+
+/*#include<iostream>
+#include<vector>
+#include<unordered_map>
+
+using namespace std;
+
+bool canPairs(vector<int>& arr,int k){
+    int n=arr.size();
+
+    if(n%2!=0){
+        return false;
+    }
+
+    unordered_map<int,int> freq;
+    
+    //count occurences of all remainders
+    for(int x: arr){
+        freq[((x%k)+k)%k]++;
+    }
+
+    //Treaverse the array and check pairs
+    for(int x:arr){
+        int rem=((x%k)+k)%k;
+
+        //If rem*2=k
+        if(2*rem==k){
+            if(freq[rem]%2!=0){
+                return false;
+            }
+        }
+
+        //if rem=0 there must be even occurences
+        else if(rem==0){
+            if(freq[rem]%2!=0){
+                return false;
+            }
+        }
+        //else occurences of remainder and l-remainder must ,match
+
+        else if(freq[rem]!=freq[k-rem]){
+            return false;
+        }
+    }
+    return true;
+}
+
+int main(){
+    vector<int> arr={92,75,65,48,45,35};
+    int k=10;
+
+    canPairs(arr,k)?cout<<"True":cout<<"False";
+    return 0;
+}*/
+
+//More efficient approach
+
+/*#include<iostream>
+#include<vector>
+#include<unordered_map>
+
+using namespace std;
+
+bool canPairs(vector<int>& arr,int k){
+
+    if(arr.size()%2!=0){
+        return false;
+    }
+
+    vector<int> freq(k);
+
+    for(int x:arr){
+        int rem=x%k;
+
+        //if complement of the current
+        //remainder exists in freq, decrement its count
+        if(freq[(k-rem)%k]!=0){
+            freq[(k-rem)%k]--;
+        }
+
+        //otherwise increment the count
+        else{
+            freq[rem]++;
+        }
+    }
+    //check if all elements in the frequency
+    //array are 0
+    for(int count:freq){
+        if(count!=0){
+            return false;
+        }
+
+    }
+    return true;
+}
+int main(){
+    vector<int> arr={92,75,65,48,45,35};
+    int k=10;
+
+    canPairs(arr,k)?cout<<"True":cout<<"False";
+    return 0;
+}*/
+
+//Q12
+
+#include<iostream>
+#include<vector>
+#include<unordered_map>
+
+using namespace std;
+
+int longestSubarrayDivk(vector<int>& arr,int k){
+    int n=arr.size(),res=0;
+    unordered_map<int,int> prefIdx;
+    int sum=0;
+
+    //iterate over all end points
+    for(int i=0;i<n;i++){
+        sum=((sum+arr[i])%k+k)+k;
+
+        if(sum==0){
+            res=i+1;
+        }
+        else if(prefIdx.find(sum)!=prefIdx.end()){
+            res=max(res,i-prefIdx[sum]);
+        }
+        else{
+            prefIdx[sum]=i;
+        }
+    }
+    return res;
+}
+
+int main(){
+    vector<int> arr={2,7,6,1,4,5};
+    int k=3;
+    cout<<longestSubarrayDivk(arr,k);
     return 0;
 }
