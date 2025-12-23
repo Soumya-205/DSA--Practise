@@ -547,7 +547,7 @@ int main(){
 }*/
 
 //Q4
-#include<iostream>
+/*#include<iostream>
 #include<vector>
 #include<unordered_map>
 
@@ -587,6 +587,59 @@ int main(){
 
     for(int i=0;i<res.size();i++){
         cout<<res[i][0]<<" "<<res[i][1]<<" "<<res[i][2]<<endl;
+    }
+    return 0;
+}*/
+
+/*git status
+git add hashing.cpp
+git commit -m "Fix bug in hashing dry run"
+git push origin main
+*/
+
+//Q15
+
+#include<iostream>
+#include<vector>
+#include<map>
+
+using namespace std;
+
+vector<vector<string>> findItinerary(vector<vector<string>>& arr){
+    map<string,string> dataSet;
+    for(auto i: arr){
+        dataSet[i[0]]=i[1];
+    }
+    map<string,string> reverseMap;
+    for(auto i: arr){
+        reverseMap[i[1]]=i[0];
+    }
+
+    //Find the starting point itinerary
+    string start;
+
+    for(int i=0;i<arr.size();i++){
+        if(reverseMap.count(arr[i][0])==0){
+            start=arr[i][0];
+            break;
+        }
+    }
+    vector<vector<string>> ans;
+
+    auto it=dataSet.find(start);
+    while(it!=dataSet.end()){
+        ans.push_back({it->first,it->second});
+        it=dataSet.find(it->second);
+    }
+    return ans;
+}
+
+int main(){
+    vector<vector<string>>arr={{"Chennai","Bangalore"},{"Bombay","Delhi"},{"Goa","Chennai"},{"Delhi","Goa"}};
+
+    vector<vector<string>> res=findItinerary(arr);
+    for(auto i:res){
+        cout<<i[0]<<"->"<<i[1]<<endl;
     }
     return 0;
 }
