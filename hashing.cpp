@@ -599,7 +599,7 @@ git push origin main
 
 //Q15
 
-#include<iostream>
+/*#include<iostream>
 #include<vector>
 #include<map>
 
@@ -641,5 +641,61 @@ int main(){
     for(auto i:res){
         cout<<i[0]<<"->"<<i[1]<<endl;
     }
+    return 0;
+}*/
+
+//Q5
+
+#include<iostream>
+#include<vector>
+#include<unordered_map>
+
+using namespace std;
+
+string calculateFraction(int a,int b){
+    //if the numerator is zero, ans is zero
+    if(a==0){
+        return "0";
+    }
+    //if exactly one of the numerator or denominator is negative then result will be neagtive
+    string res=(a<0)^(b<0)?"-":"";
+
+    a=abs(a);
+    b=abs(b);
+
+    //Calculate and append the part before decimal
+    res+=to_string(a/b);
+    int rem=a%b;
+
+    //if completely divisible return res
+    if(rem==0){
+        return res;
+    }
+
+    res.append(".");
+    unordered_map<int,int> mp;
+
+    while(rem>0){
+        //If this remainder is already seen then there exists a repeating fraction
+        if(mp.find(rem)!=mp.end()){
+            res.insert(mp[rem],"(");
+            res.append(")");
+            break;
+
+        }
+        //if the remainder is seen for first time
+        //store in mp
+        mp[rem]=res.size();
+        rem=rem*10;
+
+        //Calculate quotient, append it to result and calculate the remainder
+        res+=to_string(rem/b);
+        rem=rem%b;
+    }
+    return res;
+}
+int main(){
+    int a=50,b=22;
+    cout<<calculateFraction(a,b)<<endl;
     return 0;
 }
