@@ -646,7 +646,7 @@ int main(){
 
 //Q5
 
-#include<iostream>
+/*#include<iostream>
 #include<vector>
 #include<unordered_map>
 
@@ -698,4 +698,5 @@ int main(){
     int a=50,b=22;
     cout<<calculateFraction(a,b)<<endl;
     return 0;
-}
+}*/
+
