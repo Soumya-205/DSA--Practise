@@ -226,7 +226,7 @@ int main(){
 }*/
 
 //Subarray Division
-#include<iostream>
+/*#include<iostream>
 #include<vector>
 
 using namespace std;
@@ -264,6 +264,172 @@ int main(){
     cin>>d>>m;
 
     int result=birthday(s,d,m);
+    cout<<result;
+    return 0;
+}*/
+
+//Breaking the records
+/*#include<iostream>
+#include<vector>
+using namespace std;
+vector<int>breakingRecords(vector<int>scores){
+    
+
+    int minScore=scores[0];
+    int maxScore=scores[0];
+    int minCount=0;
+    int maxCount=0;
+
+    for(int i=1;i<scores.size();i++){
+        if(scores[i]>maxScore){
+            maxScore=scores[i];
+            maxCount++;
+        }
+        if(scores[i]<minScore){
+            minScore=scores[i];
+            minCount++;
+        }
+    }
+    return {maxCount,minCount};
+}
+int main(){
+    int n;
+    cin>>n;
+
+    vector<int>scores(n);
+    for(int i=0;i<n;i++){
+        cin>>scores[i];
+    }
+    vector<int>result=breakingRecords(scores);
+    cout<<result[0]<<" "<<result[1];
+    return 0;
+}*/
+
+//New Year Chaos
+/*#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;    
+void minimumBribes(vector<int>q){
+    int bribes=0;
+    for(int i=0;i<q.size();i++){
+        if(q[i]- (i+1)>2){
+            cout<<"Too chaotic"<<endl;
+            return;
+        }
+        for(int j=max(0,q[i]-2);j<i;j++){
+            if(q[j]>q[i]){
+                bribes++;
+            }
+        }
+    }
+    cout<<bribes<<endl;
+}
+int  main(){
+    int n;
+    cin>>n;
+    vector<int>q(n);
+    for(int i=0;i<n;i++){
+        cin>>q[i];
+    }
+    minimumBribes(q);
+    return 0;   
+}*/
+
+//Big Sorting
+/*#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+bool compare(string a,string b){
+    if(a.size()==b.size()){
+        return a.size()<b.size();
+    }
+    return a<b;
+}
+vector<string> bigSorting(vector<string> unsorted){
+    sort(unsorted.begin(),unsorted.end(),compare);
+    return unsorted;
+}
+int main(){
+    int n;
+    cin>>n;
+
+    vector<string>unsorted(n);
+    for(int i=0;i<n;i++){
+        cin>>unsorted[i];
+    }
+    vector<string>result=bigSorting(unsorted);
+    for(string x:result){
+        cout<<x<<endl;
+    }
+    return 0;
+}*/
+
+//Closest Numbers
+/*#include<iostream>
+#include<vector>
+#include<climits>
+#include<algorithm>
+using namespace std;
+vector<int> closestNumbers(vector<int>arr){
+    sort(arr.begin(),arr.end());
+    vector<int>result;
+    int minimum=INT_MAX;
+
+    for(int i=1;i<arr.size()-1;i++){
+        int diff=arr[i]-arr[i-1];
+        minimum=min(minimum,diff);
+    }
+    for(int i=1;i<arr.size()-1;i++){
+        int diff=arr[i]-arr[i-1];
+        if(diff==minimum){
+            result.push_back(arr[i-1]);
+            result.push_back(arr[i]);
+        }
+    }
+    return result;
+}
+int main(){
+    int n;
+    cin>>n;
+
+    vector<int>arr(n);
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    vector<int>result=closestNumbers(arr);
+    for(int i=0;i<result.size();i++){
+        cout<<result[i]<<" ";
+    }
+    return 0;
+}*/
+
+//Minimum Swaps 2
+#include<iostream>  
+#include<vector>
+#include<algorithm>
+using namespace std;
+int minimumSwaps(vector<int>arr){
+    int swaps=0;
+    for(int i=0;i<arr.size();i++){
+        while(arr[i]!=i+1){
+            int correctIdx=arr[i]-1;
+            swap(arr[i],arr[correctIdx]);
+            swaps++;
+        }
+    }
+    return swaps;
+}
+int main(){
+    int n;
+    cin>>n;
+
+    vector<int>arr(n);
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    int result=minimumSwaps(arr);
     cout<<result;
     return 0;
 }
