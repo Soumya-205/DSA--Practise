@@ -406,7 +406,7 @@ int main(){
 }*/
 
 //Minimum Swaps 2
-#include<iostream>  
+/*#include<iostream>  
 #include<vector>
 #include<algorithm>
 using namespace std;
@@ -431,5 +431,34 @@ int main(){
     }
     int result=minimumSwaps(arr);
     cout<<result;
+    return 0;
+}*/
+
+//Mini-max Sum
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+void miniMaxSum(vector<int>arr){
+    long total=0;
+    int minimum=arr[0];
+    int maximum=arr[0];
+    for(int i=0;i<arr.size();i++){
+        total+=arr[i];
+
+        maximum=max(maximum,arr[i]);
+        minimum=min(minimum,arr[i]);
+    }
+    long minSum=total-maximum;
+    long maxSum=total-minimum;
+
+    cout<<minSum<<" "<<maxSum;
+}
+int main(){
+    vector<int>arr(5);
+    for(int i=0;i<5;i++){
+        cin>>arr[i];
+    }
+    miniMaxSum(arr);
     return 0;
 }
